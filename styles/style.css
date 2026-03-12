@@ -1,0 +1,68 @@
+body {
+    background-color: #ffde1c;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    height: auto;
+    max-width: 75vw;
+    margin: 50px auto;
+}
+
+.eevee-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: -7rem;
+    gap: 1.5rem;
+}
+.header {
+    color: #1A1A1A;
+    font-size: 2rem;
+    position: relative;
+    z-index: 1;
+    margin-top: -4rem; /* Move header up under snoopy-header */
+    margin-left: -5.5rem;
+    font-family: "Archivo Black", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    opacity: 0.8;
+    animation: fadeIn 1.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 0.8; }
+}
+
+
+.snoopy-footer {
+    width: 75%;
+    height: auto;
+    position: relative;
+    z-index: 2;
+    display: block;
+    margin-bottom: -95px; /* Pull header up underneath image */
+}
+
+.snoopy-header {
+    width: 9rem;
+    height: auto;
+    z-index: 2;
+    margin-bottom: 1rem;
+}
+
+.written-content {
+    font-family: "Rubik", "Noto Serif", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.download-icon {
+    opacity: .75;
+    width: 2rem;
+    height: auto;
+}
