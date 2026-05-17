@@ -1,5 +1,11 @@
 body {
     /* background set by random-gradient.js */
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    overflow: hidden;
 }
 
 .card {
@@ -7,8 +13,8 @@ body {
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    height: auto;
-    max-width: 75vw;
+    height: 85vh;
+    max-width: 80vw;
     margin: 50px auto;
 }
 
