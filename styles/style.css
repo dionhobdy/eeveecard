@@ -13,9 +13,9 @@ body {
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    height: 85vh;
+    height: 89vh;
     max-width: 80vw;
-    margin: 50px auto;
+    margin: 25px auto;
 }
 
 .eevee-header-row {

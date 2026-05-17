@@ -6,13 +6,16 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const downloadBtn = document.querySelector('.download-icon');
-    const card = document.querySelector('.card');
-    if (downloadBtn && card) {
+    if (downloadBtn) {
         downloadBtn.addEventListener('click', () => {
-            html2canvas(card).then(canvas => {
+            html2canvas(document.body, {
+                useCORS: true,
+                windowWidth: document.documentElement.scrollWidth,
+                windowHeight: document.documentElement.scrollHeight
+            }).then(canvas => {
                 const link = document.createElement('a');
                 link.href = canvas.toDataURL('image/png');
-                link.download = 'birthday-card.png';
+                link.download = 'birthday-card-fullpage.png';
                 link.click();
             });
         });
