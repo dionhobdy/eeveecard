@@ -23,7 +23,10 @@
     }
 
     // Always use the locked colors for the background
-    document.body.style.background = `linear-gradient(135deg, ${color1}, ${color2})`;
+    const gradient = `linear-gradient(135deg, ${color1}, ${color2})`;
+    document.body.style.background = gradient;
+    // Set the same gradient for the .name class
+    document.documentElement.style.setProperty('--name-gradient', gradient);
 
     // Only allow changing the gradient on March 13th
     if (today.getMonth() === 2 && today.getDate() === 13) {

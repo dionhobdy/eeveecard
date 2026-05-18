@@ -15,7 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }).then(canvas => {
                 const link = document.createElement('a');
                 link.href = canvas.toDataURL('image/png');
-                link.download = 'birthday-card-fullpage.png';
+                // Add a timestamp to the filename
+                const now = new Date();
+                const timestamp = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0') + '_' + String(now.getHours()).padStart(2, '0') + '-' + String(now.getMinutes()).padStart(2, '0') + '-' + String(now.getSeconds()).padStart(2, '0');
+                link.download = `birthday-card-${timestamp}.png`;
                 link.click();
             });
         });
