@@ -1,13 +1,20 @@
-.fortune {
-    font-weight: bold;
-}
-body {
+
     /* background set by random-gradient.js */
     min-height: 100vh;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center center;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    background-size: 100vw 100vh !important;
+    background-position: 0% 50% !important;
+    animation: animated-gradient 8s ease-in-out infinite alternate;
+}
+
+@keyframes animated-gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
 }
 
 .card {
@@ -15,7 +22,7 @@ body {
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    height: 92vh;
+    height: auto;
     max-width: 80vw;
     margin: 25px auto;
     position: relative;
@@ -29,6 +36,11 @@ body {
     margin-top: -7rem;
     gap: 1.5rem;
 }
+
+.fortune {
+    font-weight: bold;
+}
+
 .header {
     color: #1A1A1A;
     font-size: 2rem;
@@ -60,6 +72,10 @@ body {
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 0.8; }
+}
+
+.role-model {
+    font-weight: 600;
 }
 
 .signature {
