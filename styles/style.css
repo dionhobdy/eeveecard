@@ -1,20 +1,11 @@
 
+body {
     /* background set by random-gradient.js */
     min-height: 100vh;
-    background-repeat: no-repeat !important;
-    background-attachment: fixed !important;
-    background-size: 100vw 100vh !important;
-    background-position: 0% 50% !important;
-    animation: animated-gradient 8s ease-in-out infinite alternate;
-}
-
-@keyframes animated-gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    100% {
-        background-position: 100% 50%;
-    }
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
 }
 
 .card {
