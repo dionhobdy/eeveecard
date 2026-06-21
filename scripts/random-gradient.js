@@ -2,6 +2,7 @@
 (function() {
     const transitionDurationMs = 900;
     let transitionTimer = null;
+    let currentGradientColors = null;
 
     function getRandomColor() {
         const letters = '0123456789ABCDEF';
@@ -33,11 +34,19 @@
         const gradient = buildGradient(c1, c2);
         document.body.style.background = gradient;
         document.documentElement.style.setProperty('--name-gradient', gradient);
+        currentGradientColors = [c1, c2];
     }
 
     function transitionToGradient(c1, c2) {
+        if (currentGradientColors && currentGradientColors[0] === c1 && currentGradientColors[1] === c2) {
+            return;
+        }
+
         const nextGradient = buildGradient(c1, c2);
+
+        document.body.classList.remove('gradient-transition');
         document.body.style.setProperty('--next-gradient', nextGradient);
+        void document.body.offsetWidth;
 
         if (transitionTimer) {
             window.clearTimeout(transitionTimer);
@@ -48,9 +57,8 @@
         });
 
         transitionTimer = window.setTimeout(function () {
-            document.body.style.background = nextGradient;
+            setBodyGradient(c1, c2);
             document.body.classList.remove('gradient-transition');
-            document.documentElement.style.setProperty('--name-gradient', nextGradient);
             transitionTimer = null;
         }, transitionDurationMs);
     }
@@ -65,7 +73,7 @@
             const c2 = getRandomColor();
             localStorage.setItem('lockedGradientColor1', c1);
             localStorage.setItem('lockedGradientColor2', c2);
-            setBodyGradient(c1, c2);
+            transitionToGradient(c1, c2);
         };
     } else {
         window.setRandomGradient = function() {};

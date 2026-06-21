@@ -30,6 +30,13 @@
         if (nextBtn) {
             nextBtn.disabled = index === parts.length - 1;
         }
+
+        window.dispatchEvent(new CustomEvent('cardpartchange', {
+            detail: {
+                index: index,
+                part: index + 1
+            }
+        }));
     }
 
     function goTo(newIndex) {

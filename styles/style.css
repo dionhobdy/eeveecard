@@ -81,10 +81,38 @@ body.gradient-transition::before {
     align-items: center;
 }
 
+.card-part[data-part="1"] {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-part[data-part="1"].confetti-active {
+    isolation: isolate;
+}
+
+.confetti-piece {
+    position: absolute;
+    top: -14vh;
+    z-index: 0;
+    border-radius: 0.12rem;
+    opacity: 0;
+    pointer-events: none;
+    animation-name: confettiFall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    will-change: transform, opacity;
+}
+
 .card-part.active {
     display: flex;
     width: 100%;
     animation: partFadeIn 1.5s ease forwards;
+}
+
+.card-part[data-part="1"] .header,
+.card-part[data-part="1"] .name {
+    position: relative;
+    z-index: 1;
 }
 
 .card-controls {
@@ -201,6 +229,20 @@ body.gradient-transition::before {
 @keyframes partFadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }
+}
+
+@keyframes confettiFall {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, -12vh, 0) rotate(0deg);
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.95;
+        transform: translate3d(var(--confetti-drift, 0px), 115vh, 0) rotate(540deg);
+    }
 }
 
 .role-model {
