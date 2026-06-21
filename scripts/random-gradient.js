@@ -1,5 +1,8 @@
 // This script sets a random two-color gradient as the background on each page load
 (function() {
+    const transitionDurationMs = 900;
+    let transitionTimer = null;
+
     function getRandomColor() {
         const letters = '0123456789ABCDEF';
         let color = '#';
@@ -22,11 +25,38 @@
         localStorage.setItem('lockedGradientColor2', color2);
     }
 
-    // Always use the locked colors for the background
-    const gradient = `linear-gradient(135deg, ${color1}, ${color2})`;
-    document.body.style.background = gradient;
-    // Set the same gradient for the .name class
-    document.documentElement.style.setProperty('--name-gradient', gradient);
+    function buildGradient(c1, c2) {
+        return `linear-gradient(135deg, ${c1}, ${c2})`;
+    }
+
+    function setBodyGradient(c1, c2) {
+        const gradient = buildGradient(c1, c2);
+        document.body.style.background = gradient;
+        document.documentElement.style.setProperty('--name-gradient', gradient);
+    }
+
+    function transitionToGradient(c1, c2) {
+        const nextGradient = buildGradient(c1, c2);
+        document.body.style.setProperty('--next-gradient', nextGradient);
+
+        if (transitionTimer) {
+            window.clearTimeout(transitionTimer);
+        }
+
+        requestAnimationFrame(function () {
+            document.body.classList.add('gradient-transition');
+        });
+
+        transitionTimer = window.setTimeout(function () {
+            document.body.style.background = nextGradient;
+            document.body.classList.remove('gradient-transition');
+            document.documentElement.style.setProperty('--name-gradient', nextGradient);
+            transitionTimer = null;
+        }, transitionDurationMs);
+    }
+
+    // Always use the locked colors for the initial background
+    setBodyGradient(color1, color2);
 
     // Only allow changing the gradient on March 13th
     if (today.getMonth() === 2 && today.getDate() === 13) {
@@ -35,9 +65,14 @@
             const c2 = getRandomColor();
             localStorage.setItem('lockedGradientColor1', c1);
             localStorage.setItem('lockedGradientColor2', c2);
-            document.body.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
+            setBodyGradient(c1, c2);
         };
     } else {
         window.setRandomGradient = function() {};
     }
+
+    // Used by card-navigation.js to animate to new gradients between parts.
+    window.transitionToRandomGradient = function () {
+        transitionToGradient(getRandomColor(), getRandomColor());
+    };
 })();

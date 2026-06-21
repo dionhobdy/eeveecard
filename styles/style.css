@@ -2,22 +2,151 @@
 body {
     /* background set by random-gradient.js */
     min-height: 100vh;
+    overflow-y: hidden;
+    margin: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     background-position: center center;
 }
 
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: var(--next-gradient, transparent);
+    opacity: 0;
+    transition: opacity 0.9s ease;
+    z-index: 0;
+}
+
+body.gradient-transition::before {
+    opacity: 1;
+}
+
+.card,
+.card * {
+    color: #ffffff !important;
+    text-shadow:
+        -1px -1px 0 rgba(0, 0, 0, 0.0025),
+         1px -1px 0 rgba(0, 0, 0, 0.0025),
+        -1px  1px 0 rgba(0, 0, 0, 0.0025),
+         1px  1px 0 rgba(0, 0, 0, 0.0025),
+         0px -1px 0 rgba(0, 0, 0, 0.0025),
+         0px  1px 0 rgba(0, 0, 0, 0.0025),
+        -1px  0px 0 rgba(0, 0, 0, 0.0025),
+         1px  0px 0 rgba(0, 0, 0, 0.0025);
+}
+
 .card {
-    background-color: rgba(255,255,255,0.95);
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: none !important;
+    background-color: transparent !important;
+    border-radius: 0;
+    box-shadow: none !important;
+    filter: none;
     padding: 20px;
     height: auto;
     max-width: 80vw;
-    margin: 25px auto;
+    margin: 0 auto;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    z-index: 1;
+}
+
+.card-parts {
+    min-height: 60vh;
+    width: 100%;
+    padding-bottom: 5.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-part {
+    display: none;
+    min-height: 60vh;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-part.active {
+    display: flex;
+    width: 100%;
+    animation: partFadeIn 1.5s ease forwards;
+}
+
+.card-controls {
+    position: absolute;
+    left: 50%;
+    bottom: 9.2rem;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0;
+}
+
+.nav-arrow {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 999px;
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.nav-arrow {
+    display: none;
+}
+
+.nav-arrow:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.part-indicators {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.swipe-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 6.8rem;
+    transform: translateX(-50%);
+    margin-top: 0;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 1.1rem;
+    opacity: 0.5;
+}
+
+.dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.45);
+}
+
+.dot.active {
+    background: rgba(255, 255, 255, 0.95);
 }
 
 .eevee-header-row {
@@ -34,11 +163,13 @@ body {
 
 .header {
     color: #1A1A1A;
-    font-size: 2rem;
+    font-size: 12vw;
     position: relative;
     z-index: 1;
-    margin-top: -4rem; /* Move header up under snoopy-header */
-    margin-left: -5.5rem;
+    height: auto;
+    line-height: 1;
+    margin-top: 0;
+    margin-left: 0;
     font-family: "Archivo Black", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -48,11 +179,13 @@ body {
 
 .name {
     color: #1A1A1A;
-    font-size: 3.5rem;
+    font-size: 17vw;
     position: relative;
     z-index: 1;
-    margin-top: -2rem; /* Move name up under snoopy-header */
-    margin-left: -5.5rem;
+    height: auto;
+    line-height: 1;
+    margin-top: 0;
+    margin-left: 0;
     font-family: "Archivo Black", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -63,6 +196,11 @@ body {
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 0.8; }
+}
+
+@keyframes partFadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
 .role-model {
@@ -80,6 +218,19 @@ body {
     font-family: "Rubik", "Noto Serif", sans-serif;
     font-weight: 300;
     font-style: normal;
+    font-size: clamp(1.2rem, 2.6vw, 2rem);
+}
+
+.card-part[data-part="3"] .section-label {
+    margin-top: 1rem;
+}
+
+.card-part[data-part="3"] .section-label:first-child {
+    margin-top: 0;
+}
+
+.card-part[data-part="4"] .final-block + .final-block {
+    margin-top: 1.5rem;
 }
 
 .download-icon {

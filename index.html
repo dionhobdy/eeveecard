@@ -11,34 +11,49 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="card">
-        <center>
-        <h1 class="header" style="margin-top: .25rem; margin-left: -.25rem;">HAPPY BIRTHDAY</h1>
-        <h1 class="name" style="margin-left: -.25rem;">EEVEE</h1>
-        <div class="written-content">You're years old now!? It felt like yesterday when I first met you.</div>
-        <br/>
-        <div class="written-content">This is a very special card. Open this every year on your birthday and it will update. No matter if you are or 100 years old, every year will be something new.</div>
-        <br/>
-        <br/>
-        <div class="written-content">Fortune:</div>
-        <div class="written-content fortune" style="font-weight: 600;"></div>
-        <br/>
-        <div class="written-content">Role Model:</div>
-        <div class="written-content">(look up to this person)</div>
-        <div class="written-content role-model" style="font-weight: 600;"></div>
-        <br/>
-        <div class="written-content">Uncle Dee's Life Advice:</div>
-        <div class="written-content lifeadvice" style="font-weight: 600;"></div>
-        <br/>
-        <div class="written-content">Everyday you are changing and your uncle is proud of the person you are today and the person you are becoming.</div>
-        <br/>
-        <div class="written-content">Don't forget to enjoy the present while you plan for the future.</div>
-        <br/>
-        <div class="written-content">Love you, Eevee!</div>
-        <br/>
-        <div class="written-content">Cheers,</div>
-        <img class="signature" src="./assets/signature.png" alt="Signature" />
-   </center>
+    <div class="card" tabindex="0" aria-label="Birthday card slides">
+        <div class="card-parts">
+            <section class="card-part active" data-part="1">
+                <h1 class="header" style="margin-top: .25rem; margin-left: -.25rem;">HAPPY BIRTHDAY</h1>
+                <h1 class="name" style="margin-left: -.25rem;">EEVEE</h1>
+            </section>
+
+            <section class="card-part" data-part="2">
+                <div class="written-content">You're years old now!? It felt like yesterday when I first met you.</div>
+                <br/>
+                <div class="written-content">This is a very special card. Open this every year on your birthday and it will update. No matter if you are or 100 years old, every year will be something new.</div>
+            </section>
+
+            <section class="card-part" data-part="3">
+                <div class="written-content section-label">Fortune:</div>
+                <div class="written-content fortune" style="font-weight: 600;"></div>
+                <br/>
+                <div class="written-content section-label">Role Model:</div>
+                <div class="written-content">(look up to this person)</div>
+                <div class="written-content role-model" style="font-weight: 600;"></div>
+                <br/>
+                <div class="written-content section-label">Uncle Dee's Life Advice:</div>
+                <div class="written-content lifeadvice" style="font-weight: 600;"></div>
+            </section>
+
+            <section class="card-part" data-part="4">
+                <div class="written-content final-block">Everyday your uncle is proud of the person you are. Don't forget to enjoy the present while you plan for the future.</div>
+                <div class="written-content final-block">Love you, Eevee!</div>
+                <div class="written-content final-block">Cheers,<br/>Uncle Dee</div>
+            </section>
+        </div>
+
+        <div class="card-controls" aria-label="Card navigation">
+            <button class="nav-arrow prev" type="button" aria-label="Previous part">&#8592;</button>
+            <div class="part-indicators" aria-hidden="true">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <button class="nav-arrow next" type="button" aria-label="Next part">&#8594;</button>
+        </div>
+        <div class="swipe-hint">swipe for the next part</div>
     </div>
     <script src="./scripts/age.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
@@ -46,5 +61,6 @@
     <script src="./fortune/fortunes.js"></script>
     <script src="./Role Models/roles.js"></script>
     <script src="./life advice/lifeadvice.js"></script>
+    <script src="./scripts/card-navigation.js"></script>
 </body>
 </html>
