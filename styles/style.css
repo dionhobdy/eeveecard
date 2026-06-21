@@ -1,5 +1,9 @@
 
 body {
+    --card-text-color: #ffffff;
+    --card-text-shadow-color: rgba(0, 0, 0, 0.22);
+    --dot-color: rgba(255, 255, 255, 0.45);
+    --dot-active-color: rgba(255, 255, 255, 0.95);
     /* background set by random-gradient.js */
     min-height: 100vh;
     overflow-y: hidden;
@@ -10,8 +14,9 @@ body {
     justify-content: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: cover;
-    background-position: center center;
+    background-size: 165% 165%;
+    background-position: 50% 50%;
+    animation: gradientFlow 22s ease-in-out infinite alternate;
 }
 
 body::before {
@@ -20,8 +25,12 @@ body::before {
     inset: 0;
     pointer-events: none;
     background: var(--next-gradient, transparent);
+    background-size: 165% 165%;
+    background-position: 50% 50%;
     opacity: 0;
     transition: opacity 0.9s ease;
+    animation: gradientFlow 22s ease-in-out infinite alternate;
+    animation-delay: -7s;
     z-index: 0;
 }
 
@@ -31,16 +40,9 @@ body.gradient-transition::before {
 
 .card,
 .card * {
-    color: #ffffff !important;
-    text-shadow:
-        -1px -1px 0 rgba(0, 0, 0, 0.0025),
-         1px -1px 0 rgba(0, 0, 0, 0.0025),
-        -1px  1px 0 rgba(0, 0, 0, 0.0025),
-         1px  1px 0 rgba(0, 0, 0, 0.0025),
-         0px -1px 0 rgba(0, 0, 0, 0.0025),
-         0px  1px 0 rgba(0, 0, 0, 0.0025),
-        -1px  0px 0 rgba(0, 0, 0, 0.0025),
-         1px  0px 0 rgba(0, 0, 0, 0.0025);
+    color: var(--card-text-color) !important;
+    text-shadow: none;
+    transition: color 0.8s ease, text-shadow 0.8s ease, border-color 0.8s ease, background-color 0.8s ease;
 }
 
 .card {
@@ -170,11 +172,11 @@ body.gradient-transition::before {
     width: 0.5rem;
     height: 0.5rem;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.45);
+    background-color: var(--dot-color);
 }
 
 .dot.active {
-    background: rgba(255, 255, 255, 0.95);
+    background-color: var(--dot-active-color);
 }
 
 .eevee-header-row {
@@ -242,6 +244,21 @@ body.gradient-transition::before {
     100% {
         opacity: 0.95;
         transform: translate3d(var(--confetti-drift, 0px), 115vh, 0) rotate(540deg);
+    }
+}
+
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 15%;
+        background-size: 150% 150%;
+    }
+    50% {
+        background-position: 100% 85%;
+        background-size: 180% 180%;
+    }
+    100% {
+        background-position: 20% 0%;
+        background-size: 165% 165%;
     }
 }
 
