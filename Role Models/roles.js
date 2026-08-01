@@ -62,7 +62,26 @@ async function fetchWikidataInfo(wikidataId) {
 
         if (occs.length > 0) info.occupation = occs.join(', ');
         if (val(r0, 'sig')) {
-            info.signature = 'https://commons.wikimedia.org/wiki/Special:FilePath/' + encodeURIComponent(val(r0, 'sig'));
+            const sigFilename = val(r0, 'sig');
+            // Fetch direct image URL from Commons API to avoid redirect issues
+            try {
+                const commonsResp = await fetch(
+                    'https://commons.wikimedia.org/w/api.php?action=query&titles=File:' +
+                    encodeURIComponent(sigFilename) +
+                    '&prop=imageinfo&iiprop=url&format=json&origin=*'
+                );
+                if (commonsResp.ok) {
+                    const commonsData = await commonsResp.json();
+                    const pages = commonsData.query && commonsData.query.pages;
+                    if (pages) {
+                        const page = Object.values(pages)[0];
+                        const imgUrl = page.imageinfo && page.imageinfo[0] && page.imageinfo[0].url;
+                        if (imgUrl) info.signature = imgUrl;
+                    }
+                }
+            } catch (_) {
+                info.signature = 'https://commons.wikimedia.org/wiki/Special:FilePath/' + encodeURIComponent(sigFilename);
+            }
         }
 
         return Object.keys(info).length > 0 ? info : null;
