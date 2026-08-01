@@ -424,6 +424,14 @@ body.gradient-transition::before {
     opacity: 0.8;
 }
 
+.role-model-signature-name {
+    font-family: "Noto Serif", serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    margin: 0.5rem auto 0.75rem;
+    opacity: 0.9;
+}
+
 .role-model-quote {
     font-family: "Noto Serif", serif;
     font-style: italic;
@@ -443,5 +451,10 @@ body.gradient-transition::before {
     .card-part[data-part="1"] .slide-text-box {
         width: 88vw;
         max-width: 88vw;
+    }
+
+    .card {
+        justify-content: flex-start;
+        padding-top: 6vh;
     }
 }

@@ -37,7 +37,7 @@ async function loadFortune() {
             let age = now.getFullYear() - birthDate.getFullYear();
             const m = now.getMonth() - birthDate.getMonth();
             if (m < 0 || (m === 0 && now.getDate() < birthDate.getDate())) age--;
-            const rand = seededRand(age * 7919);
+            const rand = seededRand(age * 6271);
             const nums = [];
             while (nums.length < 6) {
                 const n = Math.floor(rand() * 49) + 1;

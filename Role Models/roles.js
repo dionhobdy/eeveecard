@@ -90,13 +90,13 @@ function renderRoleModelInfo(info) {
     }).join('');
 
     const sigImg = document.querySelector('.role-model-signature');
-    if (sigImg) {
-        if (info.signature) {
-            sigImg.src = info.signature;
-            sigImg.style.display = '';
-        } else {
-            sigImg.style.display = 'none';
-        }
+    const sigName = document.querySelector('.role-model-signature-name');
+    if (info.signature) {
+        if (sigImg) { sigImg.src = info.signature; sigImg.style.display = ''; }
+        if (sigName) sigName.style.display = 'none';
+    } else {
+        if (sigImg) sigImg.style.display = 'none';
+        if (sigName) sigName.style.display = '';
     }
 }
 
@@ -175,6 +175,12 @@ async function loadRoleModel() {
             } else {
                 img.style.display = 'none';
             }
+        }
+
+        // Populate name fallback (used if no signature image)
+        const sigName = document.querySelector('.role-model-signature-name');
+        if (sigName && lockedRoleModel) {
+            sigName.textContent = lockedRoleModel.trim();
         }
 
         if (lockedRoleModelInfo) {
