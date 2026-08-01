@@ -14,32 +14,54 @@
     <div class="card" tabindex="0" aria-label="Birthday card slides">
         <div class="card-parts">
             <section class="card-part active" data-part="1">
-                <h1 class="header" style="margin-top: .25rem; margin-left: -.25rem;">HAPPY BIRTHDAY</h1>
-                <h1 class="name" style="margin-left: -.25rem;">EEVEE</h1>
+                <div class="slide-text-box">
+                    <h1 class="header" style="margin-top: .25rem; margin-left: -.25rem;">HAPPY BIRTHDAY</h1>
+                    <h1 class="name" style="margin-left: -.25rem;">EEVEE</h1>
+                </div>
             </section>
 
             <section class="card-part" data-part="2">
-                <div class="written-content">You're years old now!? It felt like yesterday when I first met you.</div>
-                <br/>
-                <div class="written-content">This is a very special card. Open this every year on your birthday and it will update. No matter if you are or 100 years old, every year will be something new.</div>
+                <div class="slide-text-box">
+                    <div class="written-content">You're years old now!? It felt like yesterday when I first met you.</div>
+                    <div class="written-content">This is a very special card. Open this every year on your birthday and it will update. No matter if you are or 100 years old, every year will be something new.</div>
+                </div>
             </section>
 
             <section class="card-part" data-part="3">
-                <div class="written-content section-label">Fortune:</div>
-                <div class="written-content fortune" style="font-weight: 600;"></div>
-                <br/>
-                <div class="written-content section-label">Role Model:</div>
-                <div class="written-content">(look up to this person)</div>
-                <div class="written-content role-model" style="font-weight: 600;"></div>
-                <br/>
-                <div class="written-content section-label">Uncle Dee's Life Advice:</div>
-                <div class="written-content lifeadvice" style="font-weight: 600;"></div>
+                <div class="slide-text-box fortune-slide">
+                    <img class="fortune-img" src="./assets/cookie1.png" alt="Fortune cookie" />
+                    <div class="written-content section-label">Fortune:</div>
+                    <div class="written-content fortune" style="font-weight: 600;"></div>
+                    <div class="written-content section-label lucky-label">Lucky Numbers:</div>
+                    <div class="written-content lucky-numbers" style="font-weight: 600; letter-spacing: 0.15em;"></div>
+                </div>
             </section>
 
             <section class="card-part" data-part="4">
-                <div class="written-content final-block">Everyday your uncle is proud of the person you are. Don't forget to enjoy the present while you plan for the future.</div>
-                <div class="written-content final-block">Love you, Eevee!</div>
-                <div class="written-content final-block">Cheers,<br/>Uncle Dee</div>
+                <div class="slide-text-box life-advice-slide">
+                    <img class="life-advice-img" src="./assets/fox2.png" alt="Fox" />
+                    <div class="written-content section-label">Uncle Dee's Life Advice:</div>
+                    <div class="written-content lifeadvice" style="font-weight: 600;"></div>
+                </div>
+            </section>
+
+            <section class="card-part" data-part="5">
+                <div class="slide-text-box role-model-slide">
+                    <img class="role-model-img" src="" alt="" />
+                    <div class="role-model-text">
+                        <div class="written-content section-label">This Year's Role Model</div>
+                        <img class="role-model-signature" src="" alt="Signature" style="display:none;" />
+                        <div class="role-model-info"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card-part" data-part="6">
+                <div class="slide-text-box">
+                    <div class="written-content final-block">Everyday your uncle is proud of the person you are. Don't forget to enjoy the present while you plan for the future.</div>
+                    <div class="written-content final-block">Love you, Eevee!</div>
+                    <div class="written-content final-block">Cheers,<br/>Uncle Dee</div>
+                </div>
             </section>
         </div>
 
@@ -47,6 +69,8 @@
             <button class="nav-arrow prev" type="button" aria-label="Previous part">&#8592;</button>
             <div class="part-indicators" aria-hidden="true">
                 <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
                 <span class="dot"></span>
                 <span class="dot"></span>
                 <span class="dot"></span>

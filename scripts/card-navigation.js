@@ -12,6 +12,8 @@
     let index = 0;
     let touchStartX = 0;
     let touchEndX = 0;
+    let touchStartY = 0;
+    let touchEndY = 0;
     const swipeThreshold = 40;
 
     function updateView() {
@@ -80,21 +82,37 @@
         if (event.key === 'ArrowLeft') {
             goPrev();
         }
+
+        if (event.key === 'ArrowUp') {
+            if (typeof window.transitionToRandomGradient === 'function') {
+                window.transitionToRandomGradient();
+            }
+        }
     });
 
     card.addEventListener('touchstart', function (event) {
         touchStartX = event.changedTouches[0].screenX;
+        touchStartY = event.changedTouches[0].screenY;
     }, { passive: true });
 
     card.addEventListener('touchend', function (event) {
         touchEndX = event.changedTouches[0].screenX;
-        const delta = touchEndX - touchStartX;
+        touchEndY = event.changedTouches[0].screenY;
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = touchEndY - touchStartY;
 
-        if (Math.abs(delta) < swipeThreshold) {
+        if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY < -swipeThreshold) {
+            if (typeof window.transitionToRandomGradient === 'function') {
+                window.transitionToRandomGradient();
+            }
             return;
         }
 
-        if (delta < 0) {
+        if (Math.abs(deltaX) < swipeThreshold) {
+            return;
+        }
+
+        if (deltaX < 0) {
             goNext();
         } else {
             goPrev();

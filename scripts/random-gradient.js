@@ -33,19 +33,10 @@
     }
 
     function applyTextThemeForGradient(c1, c2) {
-        const rgb1 = hexToRgb(c1);
-        const rgb2 = hexToRgb(c2);
-        const avg = {
-            r: (rgb1.r + rgb2.r) / 2,
-            g: (rgb1.g + rgb2.g) / 2,
-            b: (rgb1.b + rgb2.b) / 2
-        };
-        const isLightGradient = getRelativeLuminance(avg) >= 0.46;
-
-        document.body.style.setProperty('--card-text-color', isLightGradient ? '#111111' : '#ffffff');
-        document.body.style.setProperty('--card-text-shadow-color', isLightGradient ? 'rgba(255, 255, 255, 0.28)' : 'rgba(0, 0, 0, 0.22)');
-        document.body.style.setProperty('--dot-color', isLightGradient ? 'rgba(17, 17, 17, 0.35)' : 'rgba(255, 255, 255, 0.45)');
-        document.body.style.setProperty('--dot-active-color', isLightGradient ? 'rgba(17, 17, 17, 0.9)' : 'rgba(255, 255, 255, 0.95)');
+        document.body.style.setProperty('--card-text-color', '#ffffff');
+        document.body.style.setProperty('--card-text-shadow-color', 'rgba(0, 0, 0, 0.22)');
+        document.body.style.setProperty('--dot-color', 'rgba(255, 255, 255, 0.45)');
+        document.body.style.setProperty('--dot-active-color', 'rgba(255, 255, 255, 0.95)');
     }
 
     function pickRandom(list) {
@@ -132,7 +123,7 @@
 
     function setBodyGradient(c1, c2, spec) {
         const gradient = buildGradient(c1, c2, spec);
-        document.body.style.background = gradient;
+        document.body.style.backgroundImage = gradient;
         document.documentElement.style.setProperty('--name-gradient', gradient);
         applyTextThemeForGradient(c1, c2);
         currentGradientColors = [c1, c2];

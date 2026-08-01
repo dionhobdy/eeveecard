@@ -36,6 +36,10 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function getConfettiContainer() {
+        return birthdayPart && birthdayPart.querySelector('.slide-text-box') ? birthdayPart.querySelector('.slide-text-box') : birthdayPart;
+    }
+
     function startConfetti() {
         if (!birthdayPart || !birthdayPart.classList.contains('active')) {
             return;
@@ -46,6 +50,8 @@ window.addEventListener('DOMContentLoaded', () => {
         const durationMs = Math.max(age, 1) * 1000;
         const pieceCount = Math.min(10 + (age * 4), 80);
         const colors = ['#ff5f6d', '#ffc371', '#6ee7b7', '#60a5fa', '#f472b6', '#fde047'];
+
+        const confettiContainer = getConfettiContainer();
 
         for (let i = 0; i < pieceCount; i++) {
             const piece = document.createElement('span');
@@ -63,7 +69,7 @@ window.addEventListener('DOMContentLoaded', () => {
             piece.style.width = `${size}rem`;
             piece.style.height = `${size * 1.9}rem`;
             piece.style.transform = `translate3d(0, -12vh, 0) rotate(${(i % 9) * 40}deg)`;
-            birthdayPart.appendChild(piece);
+            confettiContainer.appendChild(piece);
         }
 
         birthdayPart.classList.add('confetti-active');

@@ -21,6 +21,31 @@ async function loadFortune() {
             localStorage.setItem('lockedFortune', lockedFortune);
         }
         document.querySelector('.fortune').textContent = lockedFortune;
+
+        // Generate lucky numbers seeded by age (changes only when age changes)
+        const luckyEl = document.querySelector('.lucky-numbers');
+        if (luckyEl) {
+            function seededRand(seed) {
+                let s = seed;
+                return function() {
+                    s = (s * 1664525 + 1013904223) & 0xffffffff;
+                    return (s >>> 0) / 4294967296;
+                };
+            }
+            const birthDate = new Date('2016-03-13');
+            const now = new Date();
+            let age = now.getFullYear() - birthDate.getFullYear();
+            const m = now.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && now.getDate() < birthDate.getDate())) age--;
+            const rand = seededRand(age * 7919);
+            const nums = [];
+            while (nums.length < 6) {
+                const n = Math.floor(rand() * 49) + 1;
+                if (!nums.includes(n)) nums.push(n);
+            }
+            nums.sort(function(a, b) { return a - b; });
+            luckyEl.textContent = nums.join('   ');
+        }
     } catch (error) {
         console.error('Error fetching fortune:', error);
         document.querySelector('.fortune').textContent = 'Could not load fortune. Please try again later.';
