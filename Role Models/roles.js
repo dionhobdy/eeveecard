@@ -111,7 +111,16 @@ function renderRoleModelInfo(info) {
     const sigImg = document.querySelector('.role-model-signature');
     const sigName = document.querySelector('.role-model-signature-name');
     if (info.signature) {
-        if (sigImg) { sigImg.src = info.signature; sigImg.style.display = ''; }
+        if (sigImg) {
+            sigImg.src = info.signature;
+            sigImg.style.display = '';
+            sigImg.onerror = function() {
+                // Cached URL is broken — clear info cache so next load re-fetches
+                localStorage.removeItem('lockedRoleModelInfo');
+                sigImg.style.display = 'none';
+                if (sigName) sigName.style.display = '';
+            };
+        }
         if (sigName) sigName.style.display = 'none';
     } else {
         if (sigImg) sigImg.style.display = 'none';
